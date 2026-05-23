@@ -16,11 +16,11 @@ return new class extends Migration
             $table->string('nombre', 100);
             $table->text('descripcion');
             $table->integer('cantidad');
-            $table->string('estado', 25);
+            $table->boolean('vigente')->default(true);
             $table->text('requisitos_de_sistema');
             $table->decimal('calificacion', 2,1);
             $table->decimal('precio_unitario', 5,2);
-            $table->decimal('valor_total', 5,2);
+            $table->decimal('valor_total');
             $table->foreignId('categoria_id')->constrained();
             $table->timestamps();
         });

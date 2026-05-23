@@ -9,9 +9,9 @@ INSERT INTO rols (id, nombre, created_at, updated_at) VALUES
 -- INSERTS: users
 -- =========================
 INSERT INTO users (id, name, email, email_verified_at, password, rol_id, remember_token, created_at, updated_at) VALUES
-(1, 'Juan Pérez', 'juan@example.com', '2026-05-15 08:05:00', '$2y$12$wJwJ8K9D4vJQ9M5rVvD6Uu2b8N5P4Q5qW3h8D4o9PjS9sD8kA3R7a', 1, NULL, '2026-05-15 08:05:00', '2026-05-15 08:05:00'),
-(2, 'María López', 'maria@example.com', '2026-05-15 08:05:00', '$2y$12$wJwJ8K9D4vJQ9M5rVvD6Uu2b8N5P4Q5qW3h8D4o9PjS9sD8kA3R7a', 2, NULL, '2026-05-15 08:05:00', '2026-05-15 08:05:00'),
-(3, 'Carlos Ramírez', 'carlos@example.com', '2026-05-15 08:05:00', '$2y$12$wJwJ8K9D4vJQ9M5rVvD6Uu2b8N5P4Q5qW3h8D4o9PjS9sD8kA3R7a', 2, NULL, '2026-05-15 08:05:00', '2026-05-15 08:05:00');
+(1, 'Juan Pérez', 'juan@example.com', '2026-05-15 08:05:00', '$2y$12$scy/bCuiLKCuSzcRXNv0neWKPSKDkNWldIvqFJ8JAEW92Iycd9Vqi', 1, NULL, '2026-05-15 08:05:00', '2026-05-15 08:05:00'),
+(2, 'María López', 'maria@example.com', '2026-05-15 08:05:00', '$2y$12$scy/bCuiLKCuSzcRXNv0neWKPSKDkNWldIvqFJ8JAEW92Iycd9Vqi', 2, NULL, '2026-05-15 08:05:00', '2026-05-15 08:05:00'),
+(3, 'Carlos Ramírez', 'carlos@example.com', '2026-05-15 08:05:00', '$2y$12$scy/bCuiLKCuSzcRXNv0neWKPSKDkNWldIvqFJ8JAEW92Iycd9Vqi', 2, NULL, '2026-05-15 08:05:00', '2026-05-15 08:05:00');
 
 -- =========================
 -- INSERTS: categorias
@@ -35,13 +35,17 @@ INSERT INTO metodos_pagos (id, nombre, created_at, updated_at) VALUES
 -- INSERTS: videojuegos
 -- =========================
 INSERT INTO videojuegos 
-(id, nombre, descripcion, cantidad, estado, requisitos_de_sistema, calificacion, precio_unitario, valor_total, categoria_id, created_at, updated_at) 
+(id, nombre, descripcion, cantidad, vigente, requisitos_de_sistema, calificacion, precio_unitario, valor_total, categoria_id, created_at, updated_at) 
 VALUES
-(1, 'FIFA 25', 'Juego de fútbol', 10, 'Disponible', '8GB RAM, GTX 1050', 4.5, 59.99, 599.90, 3, '2026-05-15 08:30:00', '2026-05-15 08:30:00'),
-(2, 'Call of Duty MW3', 'Shooter de guerra', 8, 'Disponible', '16GB RAM, RTX 2060', 4.7, 69.99, 559.92, 5, '2026-05-15 08:30:00', '2026-05-15 08:30:00'),
-(3, 'The Witcher 3', 'RPG mundo abierto', 5, 'Disponible', '8GB RAM, GTX 1060', 4.9, 39.99, 199.95, 4, '2026-05-15 08:30:00', '2026-05-15 08:30:00'),
-(4, 'Minecraft', 'Sandbox y construcción', 12, 'Disponible', '4GB RAM', 4.8, 29.99, 359.88, 2, '2026-05-15 08:30:00', '2026-05-15 08:30:00'),
-(5, 'GTA V', 'Acción y aventura', 7, 'Disponible', '8GB RAM, GTX 1050 Ti', 4.8, 49.99, 349.93, 1, '2026-05-15 08:30:00', '2026-05-15 08:30:00');
+(1, 'FIFA 25', 'Juego de fútbol', 10, true, '8GB RAM, GTX 1050', 4.5, 59.99, 599.90, 3, '2026-05-15 08:30:00', '2026-05-15 08:30:00'),
+
+(2, 'Call of Duty MW3', 'Shooter de guerra', 8, true, '16GB RAM, RTX 2060', 4.7, 69.99, 559.92, 5, '2026-05-15 08:30:00', '2026-05-15 08:30:00'),
+
+(3, 'The Witcher 3', 'RPG mundo abierto', 5, true, '8GB RAM, GTX 1060', 4.9, 39.99, 199.95, 4, '2026-05-15 08:30:00', '2026-05-15 08:30:00'),
+
+(4, 'Minecraft', 'Sandbox y construcción', 12, true, '4GB RAM', 4.8, 29.99, 359.88, 2, '2026-05-15 08:30:00', '2026-05-15 08:30:00'),
+
+(5, 'GTA V', 'Acción y aventura', 7, true, '8GB RAM, GTX 1050 Ti', 4.8, 49.99, 349.93, 1, '2026-05-15 08:30:00', '2026-05-15 08:30:00');
 
 -- =========================
 -- INSERTS: compras
@@ -49,9 +53,9 @@ VALUES
 INSERT INTO compras 
 (id, fecha_entrega, direccion_envio, estado, metodo_pago_id, user_id, created_at, updated_at) 
 VALUES
-(1,  '2026-05-20', 'San Miguel, Colonia El Molino', 'Pendiente', 1, 1, '2026-05-15 09:00:00', '2026-05-15 09:00:00'),
-(2,  '2026-05-21', 'Usulután, Barrio La Parroquia', 'Enviado', 2, 2, '2026-05-15 09:05:00', '2026-05-15 09:05:00'),
-(3,  '2026-05-22', 'La Unión, Centro', 'Entregado', 3, 3, '2026-05-15 09:10:00', '2026-05-15 09:10:00');
+(1,  '2026-05-20', 'San Miguel, Colonia El Molino', true, 1, 1, '2026-05-15 09:00:00', '2026-05-15 09:00:00'),
+(2,  '2026-05-21', 'Usulután, Barrio La Parroquia', false, 2, 2, '2026-05-15 09:05:00', '2026-05-15 09:05:00'),
+(3,  '2026-05-22', 'La Unión, Centro', 'Entregado', true, 3, '2026-05-15 09:10:00', '2026-05-15 09:10:00');
 
 -- =========================
 -- INSERTS: detalles_compras

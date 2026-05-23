@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('fecha_entrega');
             $table->string('direccion_envio', 100);
-            $table->string('estado', 25);
+            $table->boolean('estado')->default(true);
             $table->foreignId('metodo_pago_id');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
