@@ -17,7 +17,7 @@ class ValidarRol
      *
      * @param  Closure(Request): (Response)  $next
      */
-    public function handle(Request $request, Closure $next, $rol): Response
+    public function handle(Request $request, Closure $next, $rol = null): Response
     {
         try {
             if (! $usuario = JWTAuth::parseToken()->authenticate()) {
@@ -32,7 +32,10 @@ class ValidarRol
         }
 
         $usuario = auth('api')->user();
-        if ($usuario->rol->nombre != $rol) {
+        if(!$rol){
+            return $next($request);
+        }
+        else if ($usuario->rol->nombre != $rol) {
             return response()->json(['error' => 'Permisos denegados'], 403);
         }
 

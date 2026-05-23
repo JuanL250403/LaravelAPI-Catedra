@@ -58,26 +58,13 @@ class CompraController extends Controller
         $compras = Compra::where('user_id', $usuario->id)->with('detalles')->get();
         return CompraResource::collection($compras);
     }
-
-    /** 
-     * Display the specified resource.
-     */
-    public function show(Compra $compra)
-    {
-        return new CompraResource($compra->load('detalles'));
-    }
-
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Compra $compra) {}
-
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Compra $compra)
+    public function destroy($id)
     {
+        $compra = Compra::findOrFail($id);
+
         if($compra->fecha_entrega > new Date()){
             return response()->json(["error" => "La compra ya ha sido entregada"])->setStatusCode(400);
         }
@@ -90,5 +77,7 @@ class CompraController extends Controller
                 'cantidad' => $d->videojuego->cantidad + $d->cantidad
             ]);
         });
+
+        return response()->json()->setStatusCode(204);
     }
 }

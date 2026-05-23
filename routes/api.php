@@ -22,13 +22,25 @@ Route::group([
     Route::get('refresco', [AuthController::class, 'refresh']);
     Route::post('login', [AuthController::class, 'login']);
     Route::post('registro', [AuthController::class, 'registro']);
-    Route::post('me', [AuthController::class, 'me'])->middleware(ValidarRol::class . ':Administrador');
 });
 
-Route::get('/videojuegos/activo/{id}', [VideojuegoController::class, 'activo']);
-Route::get('/compras/usuario', [CompraController::class, 'usuario']);
+Route::middleware([ValidarRol::class])->group(function () {
+    Route::get('/videojuegos', [VideojuegoController::class, 'index']);
+    Route::get('/videojuegos/activos/{id}', [VideojuegoController::class, 'activo']);
 
-Route::apiResource('videojuegos', VideojuegoController::class);
-Route::apiResource('compras', CompraController::class);
-Route::apiResource('metodos', MetodoPagoController::class);
-Route::apiResource('categorias', CategoriasController::class);
+    Route::post('/compras', [CompraController::class, 'store']);
+    Route::get('/compras/usuario', [CompraController::class, 'usuario']);
+    Route::apiResource('metodos', MetodoPagoController::class);
+    Route::apiResource('categorias', CategoriasController::class);
+});
+
+Route::middleware([ValidarRol::class . ':Administrador'])->group(function () {
+    Route::post('/videojuegos', [VideojuegoController::class, 'store']);
+    Route::get('/videojuegos/{id}', [VideojuegoController::class, 'show']);
+    Route::put('/videojuegos/{id}', [VideojuegoController::class, 'update']);
+    Route::delete('/videojuegos/{id}', [VideojuegoController::class, 'destroy']);
+
+    Route::get('/compras', [CompraController::class, 'index']);
+    Route::get('/compras/{id}', [CompraController::class, 'show']);
+    Route::delete('/compras/{id}', [CompraController::class, 'destroy']);
+});

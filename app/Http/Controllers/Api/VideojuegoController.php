@@ -66,8 +66,9 @@ class VideojuegoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Videojuego $videojuego)
+    public function show($id)
     {
+        $videojuego = Videojuego::findOrFail($id);
         return new VideojuegoResource($videojuego);
     }
 
@@ -91,8 +92,10 @@ class VideojuegoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Videojuego $videojuego)
+    public function destroy($id)
     {
+        $videojuego = Videojuego::findOrFail($id);
+
         $videojuego->update([
             'vigente' => !$videojuego->vigente
         ]);
